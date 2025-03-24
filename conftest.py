@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default=None, help='choose language: es or fr')
+    parser.addoption('--language', action='store', default=None, help='Choose language: es or fr')
 
 
 @pytest.fixture()
@@ -15,6 +15,6 @@ def browser(request):
         options.add_experimental_option('prefs', {'intl.accept_languages': browser_language})
         browser = webdriver.Chrome(options=options)
     else:
-        raise ValueError('empty --language option')
+        raise pytest.UsageError('--language must be "fr" or "es')
     yield browser
     browser.quit()
